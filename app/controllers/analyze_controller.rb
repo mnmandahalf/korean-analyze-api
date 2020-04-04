@@ -2,6 +2,7 @@
 
 class AnalyzeController < ApplicationController
   def index
-    head :ok
+    result = Analysis::Organizer.call(params: params)
+    render json: result.analysis
   end
 end
