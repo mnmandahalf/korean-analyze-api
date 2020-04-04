@@ -36,3 +36,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'elasticsearch', '~> 7.5.0'
 gem "interactor", "~> 3.0"
+gem "gimchi"
