@@ -4,13 +4,21 @@ class Analysis::FormatResponse
   include ::Interactor
 
   def call
-    context.analysis = farmat_response(context.analysis)
+    context.analysis = format_response(context.analysis)
   end
 
   private
 
-  def farmat_response(analysis)
-    analysis["detail"]["tokenizer"]["tokens"].map do |item|
+  def format_response(analysis)
+    {
+      text: context.text,
+      romanized: romanize(context.text),
+      tokens: format_tokens(analysis["detail"]["tokenizer"]["tokens"])
+    }
+  end
+
+  def format_tokens(tokens)
+    tokens.map do |item|
       {
         token: item["token"],
         romanized: romanize(item["token"]),
@@ -19,7 +27,7 @@ class Analysis::FormatResponse
     end
   end
 
-  def romanize(token)
-    Gimchi.romanize token
+  def romanize(text)
+    Gimchi.romanize text
   end
 end
