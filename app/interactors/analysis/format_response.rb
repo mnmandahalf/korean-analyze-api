@@ -13,7 +13,9 @@ class Analysis::FormatResponse
     {
       text: context.text,
       romanized: romanize(context.text),
-      tokens: format_tokens(analysis["detail"]["tokenizer"]["tokens"])
+      translation: context.translation,
+      tokens: format_tokens(context.tokens),
+      tokens_trans: context.tokons_translation
     }
   end
 

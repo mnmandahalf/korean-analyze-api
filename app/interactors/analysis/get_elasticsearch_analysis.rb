@@ -4,7 +4,9 @@ class Analysis::GetElasticsearchAnalysis
   include ::Interactor
 
   def call
-    context.analysis = get_es_analysis(context.text)
+    analysis = get_es_analysis(context.text)
+    context.analysis = analysis
+    context.tokens = analysis["detail"]["tokenizer"]["tokens"]
   end
 
   private
