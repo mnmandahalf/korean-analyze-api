@@ -10,7 +10,14 @@ WORD_CLASS = {
   "XSN(Noun Suffix)"=> "接尾辞",
   "MAG(General Adverb)"=> "副詞",
   "XSV(Verb Suffix)"=> "接尾辞",
-  "VX(Auxiliary Verb or Adjective)"=> "?",
-  "VCP(Positive designator)"=> "格助詞（が）",
-  "VV(Verb)" => "動詞"
+  "VX(Auxiliary Verb or Adjective)"=> "助動詞",
+  "VCP(Positive designator)"=> "格助詞",
+  "VV(Verb)" => "動詞",
+  "NNB(Dependent noun)" => "従属名詞",
+  "XR(Root)" => "形容動詞",
+  "XSA(Adjective Suffix)" => "形容詞語尾",
+  "MM(Modifier)" => "修飾語",
+  "NP(Pronoun)" => "代名詞",
+  "VCN(Negative designator)" => "否定語",
+  "SL(Foreign language)" => "外国語"
 }

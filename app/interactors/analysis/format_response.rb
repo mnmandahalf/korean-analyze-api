@@ -23,7 +23,7 @@ class Analysis::FormatResponse
       {
         token: item["token"],
         romanized: romanize(item["token"]),
-        translation: trans,
+        translation: translation(item, trans),
         word_class: WORD_CLASS[item["leftPOS"]]
       }
     end
@@ -31,5 +31,12 @@ class Analysis::FormatResponse
 
   def romanize(text)
     Gimchi.romanize text
+  end
+
+  def translation(item, trans)
+    if item["leftPOS"] == "J(Ending Particle)"
+      return "も" if item["token"] == "도"
+    end
+    return trans
   end
 end
