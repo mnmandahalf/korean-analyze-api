@@ -6,10 +6,11 @@ WORD_CLASS = {
   "NNP(Proper Noun)"=> "固有名詞",
   "J(Ending Particle)"=> "終助詞",
   "VA(Adjective)"=> "形容詞",
-  "E(Verbal endings)"=> "語尾",
+  "E(Verbal endings)"=> "動詞語尾",
   "XSN(Noun Suffix)"=> "接尾辞",
   "MAG(General Adverb)"=> "副詞",
   "XSV(Verb Suffix)"=> "接尾辞",
   "VX(Auxiliary Verb or Adjective)"=> "?",
   "VCP(Positive designator)"=> "格助詞（が）",
+  "VV(Verb)" => "動詞"
 }
