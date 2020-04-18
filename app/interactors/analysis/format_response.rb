@@ -37,11 +37,14 @@ class Analysis::FormatResponse
   def translation(item, trans)
     if item[:leftPOS] == "J(Ending Particle)"
       return "も" if item[:token] == "도"
+      return "が" if item[:token] == "이"
     end
     if item[:leftPOS] == "XSN(Noun Suffix)"
       return "たち" if item[:token] == "들"
     end
     if item[:leftPOS] == "E(Verbal endings)"
+      return "〜てから" if item[:token] == "어서"
+      return "〜れば" if item[:token] == "면"
       return nil
     end
     return trans
