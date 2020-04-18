@@ -38,6 +38,9 @@ class Analysis::FormatResponse
     if item[:leftPOS] == "J(Ending Particle)"
       return "も" if item[:token] == "도"
     end
+    if item[:leftPOS] == "E(Verbal endings)"
+      return nil
+    end
     return trans
   end
 end
