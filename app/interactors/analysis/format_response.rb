@@ -4,12 +4,12 @@ class Analysis::FormatResponse
   include ::Interactor
 
   def call
-    context.analysis = format_response(context.analysis)
+    context.analysis = format_response
   end
 
   private
 
-  def format_response(analysis)
+  def format_response
     {
       text: context.text,
       romanized: romanize(context.text),
