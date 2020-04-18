@@ -12,9 +12,9 @@ class Analysis::GetTranslation
   private
 
   def get_tokens_translation(tokens)
-    joind_tokens = tokens.map { |i| i["token"] }.join(",")
+    joind_tokens = tokens.map { |i| i[:stem] ? i[:stem] : i[:token] }.join(",")
     result = get_translation(joind_tokens)
-    result.split("、")
+    result.gsub("、",",").split(",")
   end
 
   def get_translation(text)
