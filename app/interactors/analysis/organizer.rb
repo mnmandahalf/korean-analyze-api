@@ -5,6 +5,7 @@ class Analysis::Organizer
 
   organize Analysis::CheckParameter,
            Analysis::GetElasticsearchAnalysis,
+           Analysis::FormatStem,
            Analysis::GetTranslation,
            Analysis::FormatResponse
 end

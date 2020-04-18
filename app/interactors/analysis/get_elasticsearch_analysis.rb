@@ -5,7 +5,6 @@ class Analysis::GetElasticsearchAnalysis
 
   def call
     analysis = get_es_analysis(context.text)
-    context.analysis = analysis
     context.tokens = analysis["detail"]["tokenizer"]["tokens"]
   end
 
