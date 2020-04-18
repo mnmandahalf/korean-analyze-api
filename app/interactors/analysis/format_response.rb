@@ -38,6 +38,9 @@ class Analysis::FormatResponse
     if item[:leftPOS] == "J(Ending Particle)"
       return "も" if item[:token] == "도"
     end
+    if item[:leftPOS] == "XSN(Noun Suffix)"
+      return "たち" if item[:token] == "들"
+    end
     if item[:leftPOS] == "E(Verbal endings)"
       return nil
     end
