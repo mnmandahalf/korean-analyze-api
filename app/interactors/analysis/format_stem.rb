@@ -10,6 +10,10 @@ class Analysis::FormatStem
   private
 
   def format_stem(tokens)
+    tokens = [{
+      "token": {},
+      "leftPOS": {}
+    }]
     tokens.map do |item|
       token = item["token"]
       leftPOS = item["leftPOS"]
