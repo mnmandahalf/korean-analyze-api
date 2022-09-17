@@ -1,15 +1,19 @@
-FROM ruby:2.7.1-alpine3.11
+FROM ruby:2.7.1
 RUN mkdir /app
 WORKDIR /app
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
 
-RUN apk update && \
-    apk add --no-cache bash tzdata libxml2-dev curl-dev make gcc libc-dev g++ && \
-    bundle install
-    # && \
-    # rm -rf /usr/local/bundle/cache/* /usr/local/share/.cache/* /var/cache/* /tmp/* && \
-    # apk del git libxml2-dev curl-dev make gcc libc-dev g++
+# mecab-ko
+RUN set -ex \
+	&& wget --no-check-certificate https://github.com/mnmandahalf/natto/raw/add-mecab-ko/etc/mecab-0.996-ko-0.9.2.tar.gz && tar xvf mecab-0.996-ko-0.9.2.tar.gz \
+  && cd mecab-0.996-ko-0.9.2 && ./configure && make && make install \
+  && ldconfig
+# mecab-ko-dic
+RUN set -ex \
+  && wget --no-check-certificate https://github.com/mnmandahalf/natto/raw/add-mecab-ko/etc/mecab-ko-dic-2.1.1-20180720.tar.gz && tar xvf mecab-ko-dic-2.1.1-20180720.tar.gz \
+  && cd mecab-ko-dic-2.1.1-20180720 && ./autogen.sh && ./configure && make && make install \
+  && ldconfig
 
 COPY . /app
 
@@ -18,6 +22,4 @@ RUN chmod +x /usr/bin/docker-entrypoint.sh
 ENTRYPOINT ["sh", "docker-entrypoint.sh"]
 EXPOSE 3000
 
-
-# Start the main process.
 CMD ["rails", "server", "-b", "0.0.0.0"]

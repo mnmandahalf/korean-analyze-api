@@ -1,7 +1,8 @@
 # korean-analyze-api
 
+## Dependencies
 * Ruby version
-2.7.0
+2.7.1
 
 * Configuration
 ```
