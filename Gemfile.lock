@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/mnmandahalf/natto.git
+  revision: 27d3c500a743262193a95c723bc07f5a374254f7
+  ref: 27d3c50
+  specs:
+    natto (1.2.0)
+      ffi (>= 1.9.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -177,6 +185,7 @@ DEPENDENCIES
   gimchi
   interactor (~> 3.0)
   listen (>= 3.0.5, < 3.2)
+  natto!
   puma (~> 4.1)
   rack-cors
   rails (~> 6.0.2, >= 6.0.2.2)

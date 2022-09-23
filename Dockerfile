@@ -15,6 +15,8 @@ RUN set -ex \
   && cd mecab-ko-dic-2.1.1-20180720 && ./autogen.sh && ./configure && make && make install \
   && ldconfig
 
+RUN bundle install
+
 COPY . /app
 
 COPY docker-entrypoint.sh /usr/bin/

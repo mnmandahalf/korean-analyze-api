@@ -10,22 +10,18 @@ class Analysis::FormatStem
   private
 
   def format_stem(tokens)
-    tokens = [{
-      "token": {},
-      "leftPOS": {}
-    }]
     tokens.map do |item|
-      token = item["token"]
-      leftPOS = item["leftPOS"]
+      token = item[:token]
+      feature = item[:feature]
       {
         token: token,
-        stem: stem(token, leftPOS),
-        leftPOS: leftPOS
+        stem: stem(token, feature),
+        feature: feature
       }
     end
   end
 
-  def stem(token, pos)
-    pos == "VV(Verb)" ? token + "다" : nil
+  def stem(token, feature)
+    feature == "VV" ? token + "다" : nil
   end
 end

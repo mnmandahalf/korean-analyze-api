@@ -20,14 +20,15 @@ class Analysis::FormatResponse
 
   def format_tokens(tokens, translated_tokens)
     tokens.zip(translated_tokens).map do |item, trans|
+      next if item[:feature] == "BOS/EOS"
       {
         token: item[:token],
         stem: item[:stem],
         romanized: romanize(item[:token]),
         translation: translation(item, trans),
-        word_class: WORD_CLASS[item[:leftPOS]],
+        word_class: WORD_CLASS[item[:feature]],
       }
-    end
+    end.compact
   end
 
   def romanize(text)
@@ -35,14 +36,14 @@ class Analysis::FormatResponse
   end
 
   def translation(item, trans)
-    if item[:leftPOS] == "J(Ending Particle)"
+    if item[:feature] == "J"
       return "も" if item[:token] == "도"
       return "が" if item[:token] == "이"
     end
-    if item[:leftPOS] == "XSN(Noun Suffix)"
+    if item[:feature] == "XSN"
       return "たち" if item[:token] == "들"
     end
-    if item[:leftPOS] == "E(Verbal endings)"
+    if item[:feature] == "E"
       return "〜てから" if item[:token] == "어서"
       return "〜れば" if item[:token] == "면"
       return nil
