@@ -1,9 +1,10 @@
 # frozen_string_literal: true
+
 require 'net/http'
 
 class Analysis::GetTranslation
   include ::Interactor
-  GAS_URL = "https://script.google.com/macros/s/AKfycbyZOEOeTmftFoh4vO1hmLO7JNkiWOKOMarrACMS4YLz8Dnk2o0/exec"
+  GAS_URL = 'https://script.google.com/macros/s/AKfycbyZOEOeTmftFoh4vO1hmLO7JNkiWOKOMarrACMS4YLz8Dnk2o0/exec'
 
   def call
     context.translation = get_translation(context.text)
@@ -13,9 +14,9 @@ class Analysis::GetTranslation
   private
 
   def get_tokens_translation(tokens)
-    joind_tokens = tokens.map { |i| i[:stem] ? i[:stem] : i[:token] }.join(",")
+    joind_tokens = tokens.map { |i| i[:stem] || :token }.join(',')
     result = get_translation(joind_tokens)
-    result.gsub("、",",").split(",")
+    result.gsub('、', ',').split(',')
   end
 
   def get_translation(text)
@@ -23,7 +24,7 @@ class Analysis::GetTranslation
     redirect_url = Net::HTTP.get_response(uri).response['location']
     res = Net::HTTP.get_response(URI.parse(redirect_url))
     str = res.body
-    str.force_encoding("UTF-8")
+    str.force_encoding('UTF-8')
     str
   end
 end

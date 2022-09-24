@@ -15,7 +15,7 @@ class Analysis::ParseText
     nodes.map do |node|
       {
         token: node.surface,
-        feature: node.feature.split(",").first
+        feature: node.feature.split(',').first
       }
     end
   end

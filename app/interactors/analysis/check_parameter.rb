@@ -6,6 +6,6 @@ class Analysis::CheckParameter
   def call
     text = context.params.permit(:text)[:text]
     context.fail! if text.nil?
-    context.text = text 
+    context.text = text
   end
 end
