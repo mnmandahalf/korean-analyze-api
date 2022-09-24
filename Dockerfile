@@ -22,6 +22,6 @@ COPY . /app
 COPY docker-entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/docker-entrypoint.sh
 ENTRYPOINT ["sh", "docker-entrypoint.sh"]
-EXPOSE 3000
+EXPOSE 80
 
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["rails", "server", "-b", "0.0.0.0", "-p", "80"]
