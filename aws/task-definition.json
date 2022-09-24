@@ -22,12 +22,13 @@
         "image": "931567824924.dkr.ecr.ap-northeast-1.amazonaws.com/goguma-api",
         "name": "goguma-api",
         "environment": [
-            {"name": "RAILS_ENV", "value": "production"}
+            {"name": "RAILS_ENV", "value": "production"},
+            {"name": "RAILS_LOG_TO_STDOUT", "value": "true"}
         ]
       }
     ],
     "memory": "512",
-    "taskRoleArn": null,
+    "taskRoleArn": "arn:aws:iam::931567824924:role/goguma-ecs-task-role",
     "compatibilities": [
       "FARGATE"
     ],
