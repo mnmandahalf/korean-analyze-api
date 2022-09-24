@@ -34,6 +34,16 @@ module App
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-    config.x.cors_allowed_origins = ENV.fetch('CORS_ALLOWED_ORIGINS', 'http://localhost:4000')
+    config.x.cors_allowed_origins = ENV.fetch('CORS_ALLOWED_ORIGINS', '*')
+
+    # Permit cross origin
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins Rails.application.config.x.cors_allowed_origins
+        resource '*',
+                 headers: :any,
+                 methods: [:get]
+      end
+    end
   end
 end
