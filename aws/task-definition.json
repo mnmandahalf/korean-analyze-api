@@ -1,6 +1,6 @@
 {
     "ipcMode": null,
-    "executionRoleArn": "arn:aws:iam::931567824924:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::931567824924:role/goguma-ecs-task-execution",
     "containerDefinitions": [
       {
         "logConfiguration": {
@@ -24,11 +24,17 @@
         "environment": [
             {"name": "RAILS_ENV", "value": "production"},
             {"name": "RAILS_LOG_TO_STDOUT", "value": "true"}
+        ],
+        "environmentFiles": [
+            {
+                "value": "arn:aws:s3:::goguma-config/.env",
+                "type": "s3"
+            }
         ]
       }
     ],
     "memory": "512",
-    "taskRoleArn": "arn:aws:iam::931567824924:role/goguma-ecs-task-role",
+    "taskRoleArn": null,
     "compatibilities": [
       "FARGATE"
     ],
