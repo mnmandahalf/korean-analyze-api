@@ -27,9 +27,15 @@ class Analysis::FormatResponse
         stem: item[:stem],
         romanized: romanize(item[:token]),
         translation: translation(item, trans),
-        word_class: WORD_CLASS[item[:feature]]
+        word_class: word_class_ja(item[:feature])
       }
     end.compact
+  end
+
+  def word_class_ja(feature)
+    feature.split('+').map do |f|
+      WORD_CLASS[f]
+    end.join('+')
   end
 
   def romanize(text)
@@ -49,6 +55,7 @@ class Analysis::FormatResponse
 
       return nil
     end
-    trans
+
+    return trans if item[:feature].in?(TRANSLATE_TARGETS)
   end
 end

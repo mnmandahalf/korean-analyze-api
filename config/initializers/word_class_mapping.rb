@@ -50,3 +50,15 @@ WORD_CLASS = {
   'ETM' => '連体形語尾',
   'ETN' => '名詞形전성語尾（他の品詞に役割が変わる語尾）'
 }
+
+TRANSLATE_TARGETS = %w[
+  MAG
+  VV
+  NNP
+  NNG
+  NP
+  VA
+  MAJ
+  MM
+  NR
+]
