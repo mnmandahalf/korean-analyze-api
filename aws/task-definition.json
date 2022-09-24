@@ -1,0 +1,42 @@
+{
+    "ipcMode": null,
+    "executionRoleArn": "arn:aws:iam::931567824924:role/ecsTaskExecutionRole",
+    "containerDefinitions": [
+      {
+        "logConfiguration": {
+          "logDriver": "awslogs",
+          "secretOptions": null,
+          "options": {
+            "awslogs-group": "/ecs/goguma-api",
+            "awslogs-region": "ap-northeast-1",
+            "awslogs-stream-prefix": "ecs"
+          }
+        },
+        "portMappings": [
+          {
+            "hostPort": 80,
+            "protocol": "tcp",
+            "containerPort": 3000
+          }
+        ],
+        "image": "931567824924.dkr.ecr.ap-northeast-1.amazonaws.com/goguma-api",
+        "name": "goguma-api",
+        "environment": [
+            {"name": "RAILS_ENV", "value": "production"}
+        ]
+      }
+    ],
+    "memory": "512",
+    "taskRoleArn": null,
+    "compatibilities": [
+      "FARGATE"
+    ],
+    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:931567824924:task-definition/goguma-api-task-definition",
+    "family": "goguma-api",
+    "requiresCompatibilities": [
+      "FARGATE"
+    ],
+    "networkMode": "awsvpc",
+    "cpu": "256",
+    "status": "ACTIVE"
+  }
