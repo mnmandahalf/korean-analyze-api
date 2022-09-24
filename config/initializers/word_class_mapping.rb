@@ -62,3 +62,10 @@ TRANSLATE_TARGETS = %w[
   MM
   NR
 ]
+
+STEM_TARGETS = %w[
+  VV
+  VA
+  XSA
+  NP
+]

@@ -26,7 +26,7 @@ class Analysis::FormatResponse
         token: item[:token],
         stem: item[:stem],
         romanized: romanize(item[:token]),
-        translation: translation(item, trans),
+        translation: substitute_translation(item, trans),
         word_class: word_class_ja(item[:feature])
       }
     end.compact
@@ -42,20 +42,48 @@ class Analysis::FormatResponse
     Gimchi.romanize text
   end
 
-  def translation(item, trans)
-    if item[:feature] == 'J'
+  def substitute_translation(item, trans)
+    case item[:feature]
+    when 'J'
       return 'も' if item[:token] == '도'
       return 'が' if item[:token] == '이'
-    end
-    return 'たち' if item[:feature] == 'XSN' && (item[:token] == '들')
-
-    if item[:feature] == 'E'
+    when 'JKS'
+      return 'が'
+    when 'JKO'
+      return 'を、に'
+    when 'JKG'
+      return 'の'
+    when 'JKB'
+      return 'で、から' if item[:token].in?(%w[에서 서])
+      return 'で、に、として' if item[:token].in?(%w[으로 로])
+      return 'に' if item[:token].in?(%w[에 에게 한테 께])
+      return 'くらい' if item[:token] == '만큼'
+      return 'と' if item[:token] == '와'
+    when 'JX'
+      return 'は' if item[:token] == '는'
+      return 'は' if item[:token] == '은'
+      return '〜だけ、〜さえ' if item[:token] == '만'
+      return '〜しか' if item[:token] == '밖에'
+      return '〜だけ、〜のみ' if item[:token] == '뿐'
+      return 'も' if item[:token].in?(%w[도 이나 나])
+    when 'JC'
+      return 'と' if item[:token].in?(%w[이랑 랑 과])
+    when 'XSN'
+      return 'たち' if item[:token] == '들'
+      return 'くらい' if item[:token].in?(%w[쯤 정도])
+    when 'NNB'
+      return 'くらい' if item[:token] ==  '만큼'
+    when 'E'
       return '〜てから' if item[:token] == '어서'
       return '〜れば' if item[:token] == '면'
-
-      return nil
+    when 'XSA+ETN'
+      return '〜であること、〜さ'
+    when 'XSA+ETM'
+      return '〜な、〜である'
+    when 'VCP+EC'
+      return 'でも'
     end
 
-    return trans if item[:feature].in?(TRANSLATE_TARGETS)
+    return trans if TRANSLATE_TARGETS.find { |target| item[:feature].include? target }
   end
 end

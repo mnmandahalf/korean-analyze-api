@@ -22,6 +22,6 @@ class Analysis::FormatStem
   end
 
   def stem(token, feature)
-    feature == 'VV' ? token + '다' : nil
+    feature.in?(STEM_TARGETS) ? token + '다' : nil
   end
 end
