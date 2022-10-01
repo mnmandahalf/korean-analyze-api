@@ -73,6 +73,9 @@ class Analysis::FormatResponse
       return 'くらい' if item[:token].in?(%w[쯤 정도])
     when 'NNB'
       return 'くらい' if item[:token] ==  '만큼'
+    when 'EC'
+      return 'なので' if item[:token].in?(%w[어서 아서 라서])
+      return 'だから' if item[:token].in?(%w[으니까 아니까])
     when 'E'
       return '〜てから' if item[:token] == '어서'
       return '〜れば' if item[:token] == '면'

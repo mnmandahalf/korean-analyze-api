@@ -67,5 +67,4 @@ STEM_TARGETS = %w[
   VV
   VA
   XSA
-  NP
 ]
