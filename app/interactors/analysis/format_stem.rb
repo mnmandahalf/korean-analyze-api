@@ -14,9 +14,9 @@ class Analysis::FormatStem
       token = item[:token]
       feature = item[:feature]
       {
-        token: token,
+        token:,
         stem: stem(token, feature),
-        feature: feature
+        feature:
       }
     end
   end

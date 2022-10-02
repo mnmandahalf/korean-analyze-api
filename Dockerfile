@@ -1,4 +1,4 @@
-FROM ruby:2.7.1
+FROM ruby:3.1.2
 RUN mkdir /app
 WORKDIR /app
 ARG _ARM_ARCH="arm-unknown-linux-gnu"

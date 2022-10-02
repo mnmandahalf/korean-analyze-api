@@ -20,7 +20,7 @@ class Analysis::GetTranslation
   end
 
   def get_translation(text)
-    uri = URI.parse(URI.encode("#{GAS_URL}?text=#{text}&source=ko&target=ja"))
+    uri = URI.parse("#{GAS_URL}?text=#{CGI.escape(text)}&source=ko&target=ja")
     redirect_url = Net::HTTP.get_response(uri).response['location']
     res = Net::HTTP.get_response(URI.parse(redirect_url))
     str = res.body
