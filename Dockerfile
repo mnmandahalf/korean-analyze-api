@@ -1,19 +1,25 @@
 FROM ruby:2.7.1
 RUN mkdir /app
 WORKDIR /app
-COPY Gemfile /app/Gemfile
-COPY Gemfile.lock /app/Gemfile.lock
+ARG _ARM_ARCH="arm-unknown-linux-gnu"
 
 # mecab-ko
 RUN set -ex \
 	&& wget --no-check-certificate https://github.com/mnmandahalf/natto/raw/add-mecab-ko/etc/mecab-0.996-ko-0.9.2.tar.gz && tar xvf mecab-0.996-ko-0.9.2.tar.gz \
-  && cd mecab-0.996-ko-0.9.2 && ./configure && make && make install \
-  && ldconfig
+  && cd mecab-0.996-ko-0.9.2 \
+  && if [ `uname -m` =  "aarch64" ]; then ./configure --build=${_ARM_ARCH} --host=${_ARM_ARCH} --target=${_ARM_ARCH}; \
+     else ./configure; fi \
+  && make && make install && ldconfig
 # mecab-ko-dic
 RUN set -ex \
   && wget --no-check-certificate https://github.com/mnmandahalf/natto/raw/add-mecab-ko/etc/mecab-ko-dic-2.1.1-20180720.tar.gz && tar xvf mecab-ko-dic-2.1.1-20180720.tar.gz \
-  && cd mecab-ko-dic-2.1.1-20180720 && ./autogen.sh && ./configure && make && make install \
-  && ldconfig
+  && cd mecab-ko-dic-2.1.1-20180720 && ./autogen.sh \
+  && if [ `uname -m` =  "aarch64" ]; then ./configure --build=${_ARM_ARCH} --host=${_ARM_ARCH} --target=${_ARM_ARCH}; \
+     else ./configure; fi \
+  && make && make install && ldconfig
+
+COPY Gemfile /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
 
 RUN bundle install
 
