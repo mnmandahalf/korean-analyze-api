@@ -17,6 +17,9 @@ RUN set -ex \
   && if [ `uname -m` =  "aarch64" ]; then ./configure --build=${_ARM_ARCH} --host=${_ARM_ARCH} --target=${_ARM_ARCH}; \
      else ./configure; fi \
   && make && make install && ldconfig
+# userdic
+COPY userdic mecab-ko-dic-2.1.1-20180720/userdic
+RUN cd mecab-ko-dic-2.1.1-20180720 && tools/add-userdic.sh && make install
 
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
