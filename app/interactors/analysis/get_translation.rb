@@ -14,7 +14,14 @@ class Analysis::GetTranslation
   private
 
   def get_tokens_translation(tokens)
-    joind_tokens = tokens.map { |i| i[:stem] || i[:token] }.join(',')
+    joind_tokens = tokens.map do |i|
+      if i[:token] == ","
+        # escape comma
+        "comma"
+      else
+        i[:stem] || i[:token]
+      end
+    end.join(',')
     result = get_translation(joind_tokens)
     result.gsub('、', ',').split(',')
   end
