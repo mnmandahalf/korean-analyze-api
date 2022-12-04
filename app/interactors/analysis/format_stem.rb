@@ -22,6 +22,8 @@ class Analysis::FormatStem
   end
 
   def stem(token, feature)
-    feature.in?(STEM_TARGETS) ? token + '다' : nil
+    return token + '다' if feature.in?(STEM_TARGETS)
+    return token + '하다' if feature == 'XR'
+    nil
   end
 end

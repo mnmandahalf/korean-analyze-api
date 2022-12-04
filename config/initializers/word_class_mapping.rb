@@ -61,6 +61,7 @@ TRANSLATE_TARGETS = %w[
   MAJ
   MM
   NR
+  XR
 ]
 
 STEM_TARGETS = %w[
