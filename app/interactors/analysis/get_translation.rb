@@ -17,7 +17,7 @@ class Analysis::GetTranslation
     joind_tokens = tokens.map do |i|
       if i[:token] == ","
         # escape comma
-        "comma"
+        " "
       else
         i[:stem] || i[:token]
       end

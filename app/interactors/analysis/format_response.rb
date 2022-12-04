@@ -67,7 +67,7 @@ class Analysis::FormatResponse
       return '〜だけ、〜のみ' if item[:token] == '뿐'
       return 'も' if item[:token].in?(%w[도 이나 나])
     when 'JC'
-      return 'と' if item[:token].in?(%w[이랑 랑 과])
+      return 'と' if item[:token].in?(%w[이랑 랑 과 와])
     when 'XSN'
       return 'たち' if item[:token] == '들'
       return 'くらい' if item[:token].in?(%w[쯤 정도])

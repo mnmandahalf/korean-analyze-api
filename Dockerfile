@@ -18,8 +18,8 @@ RUN set -ex \
      else ./configure; fi \
   && make && make install && ldconfig
 # userdic
-COPY userdic mecab-ko-dic-2.1.1-20180720/userdic
-RUN cd mecab-ko-dic-2.1.1-20180720 && tools/add-userdic.sh && make install
+COPY userdic mecab-ko-dic-2.1.1-20180720/user-dic
+RUN cd mecab-ko-dic-2.1.1-20180720 && ./tools/add-userdic.sh && make install
 
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
