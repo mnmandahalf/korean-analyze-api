@@ -25,7 +25,7 @@ jobs:
 
       - name: Check image already exists
         id: image-exists
-        uses: mnmandahalf/check-ecr-image-exists@v0.1.2
+        uses: mnmandahalf/check-ecr-image-exists@v0.1.3
         with:
           region: ap-northeast-1
           repository-name: goguma-api
