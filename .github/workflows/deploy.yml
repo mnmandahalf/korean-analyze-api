@@ -1,8 +1,6 @@
 name: "Deploy ECS"
 on:
   push:
-    tags:
-      - 'release-*'
 env:
   ECR_REPOSITORY: 931567824924.dkr.ecr.ap-northeast-1.amazonaws.com/goguma-api
 jobs:
@@ -24,6 +22,19 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Check image already exists
+        id: image-exists
+        uses: mnmandahalf/check-ecr-image-exists@v0.1.1
+        with:
+          region: ap-northeast-1
+          repository-name: goguma-api
+          image-tag: ${{ github.sha }}
+          access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Get the output
+        run: echo "image-exists=${{ steps.image-exists.outputs.image-exists }}"
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
