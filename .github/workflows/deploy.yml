@@ -37,9 +37,11 @@ jobs:
         run: echo "image-exists=${{ steps.image-exists.outputs.image-exists }}"
 
       - name: Set up Docker Buildx
+        if: ${{ steps.image-exists.outputs.image-exists }} == "0"
         uses: docker/setup-buildx-action@v2
 
       - name: Cache Docker layers
+        if: ${{ steps.image-exists.outputs.image-exists }} == "0"
         uses: actions/cache@v3
         with:
           path: /tmp/.buildx-cache
@@ -48,6 +50,7 @@ jobs:
             ${{ runner.os }}-buildx-
 
       - name: Build and push
+        if: ${{ steps.image-exists.outputs.image-exists }} == "0"
         id: build-image
         uses: docker/build-push-action@v3
         with:
@@ -57,6 +60,7 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
 
       - name: Move cache
+        if: ${{ steps.image-exists.outputs.image-exists }} == "0"
         run: |
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
