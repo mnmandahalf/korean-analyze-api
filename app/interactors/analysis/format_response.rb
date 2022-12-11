@@ -66,6 +66,8 @@ class Analysis::FormatResponse
       return '〜しか' if item[:token] == '밖에'
       return '〜だけ、〜のみ' if item[:token] == '뿐'
       return 'も' if item[:token].in?(%w[도 이나 나])
+      return '〜まで' if item[:token] == '까지'
+      return '〜から' if item[:token] == '부터'
     when 'JC'
       return 'と' if item[:token].in?(%w[이랑 랑 과 와])
     when 'XSN'
@@ -73,6 +75,7 @@ class Analysis::FormatResponse
       return 'くらい' if item[:token].in?(%w[쯤 정도])
     when 'NNB'
       return 'くらい' if item[:token] == '만큼'
+      return '〜すること' if item[:token] == '수'
     when 'EC'
       return 'なので' if item[:token].in?(%w[어서 아서 라서])
       return 'だから' if item[:token].in?(%w[으니까 아니까])
