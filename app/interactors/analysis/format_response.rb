@@ -55,6 +55,7 @@ class Analysis::FormatResponse
       return 'の'
     when 'JKB'
       return 'で、から' if item[:token].in?(%w[에서 서])
+      return 'から' if item[:token].in?(%w[에게서 한테서])
       return 'で、に、として' if item[:token].in?(%w[으로 로])
       return 'に' if item[:token].in?(%w[에 에게 한테 께])
       return 'くらい' if item[:token] == '만큼'
