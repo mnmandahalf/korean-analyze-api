@@ -14,16 +14,9 @@ class Analysis::GetTranslation
   private
 
   def get_tokens_translation(tokens)
-    joind_tokens = tokens.map do |i|
-      if i[:token] == ","
-        # escape comma
-        " "
-      else
-        i[:stem] || i[:token]
-      end
-    end.join(',')
-    result = get_translation(joind_tokens)
-    result.gsub('、', ',').split(',')
+    Parallel.map(tokens, in_threads: 10) do |item|
+      get_translation(item[:stem] || item[:token])
+    end
   end
 
   def get_translation(text)
