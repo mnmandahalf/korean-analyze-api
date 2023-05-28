@@ -13,4 +13,9 @@ module Interactor
   class Base
     include _Interactor
   end
+
+  module Organizer
+    def organize: (*_Interactor) -> void
+    def call: () -> Context
+  end
 end
