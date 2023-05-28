@@ -1,0 +1,16 @@
+module Interactor
+  class Context
+    def initialize: (Hash[Symbol, untyped]) -> void
+    def success?: () -> bool
+    def failure?: () -> bool
+    def fail!: (Hash[Symbol, untyped]) -> void
+  end
+
+  interface _Interactor
+    def call: () -> Context
+  end
+
+  class Base
+    include _Interactor
+  end
+end
