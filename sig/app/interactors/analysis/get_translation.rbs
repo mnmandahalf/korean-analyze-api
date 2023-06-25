@@ -1,0 +1,13 @@
+class Analysis::GetTranslation
+  include ::Interactor
+
+  GAS_URL: "https://script.google.com/macros/s/AKfycbyZOEOeTmftFoh4vO1hmLO7JNkiWOKOMarrACMS4YLz8Dnk2o0/exec"
+
+  def call: () -> untyped
+
+  private
+
+  def get_tokens_translation: (untyped tokens) -> untyped
+
+  def get_translation: (untyped text) -> untyped
+end

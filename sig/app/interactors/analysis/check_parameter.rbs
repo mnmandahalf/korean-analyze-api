@@ -1,0 +1,5 @@
+class Analysis::CheckParameter
+  include ::Interactor
+
+  def call: () -> untyped
+end

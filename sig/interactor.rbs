@@ -6,16 +6,10 @@ module Interactor
     def fail!: (Hash[Symbol, untyped]) -> void
   end
 
-  interface _Interactor
-    def call: () -> Context
-  end
-
-  class Base
-    include _Interactor
-  end
-
   module Organizer
-    def organize: (*_Interactor) -> void
+    def organize: (untyped) -> void
     def call: () -> Context
   end
+
+  def context: () -> untyped
 end

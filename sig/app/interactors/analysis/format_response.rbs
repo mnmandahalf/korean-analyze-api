@@ -1,0 +1,17 @@
+class Analysis::FormatResponse
+  include ::Interactor
+
+  def call: () -> untyped
+
+  private
+
+  def format_response: () -> { text: untyped, romanized: untyped, translation: untyped, tokens: untyped }
+
+  def format_tokens: (untyped tokens, untyped translated_tokens) -> untyped
+
+  def word_class_ja: (untyped feature) -> untyped
+
+  def romanize: (untyped text) -> untyped
+
+  def substitute_translation: (untyped item, untyped trans) -> (::String | untyped)
+end

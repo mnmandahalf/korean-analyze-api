@@ -1,0 +1,13 @@
+class Analysis::ParseText
+  include ::Interactor
+
+  def call: () -> untyped
+
+  private
+
+  def parse_text: (untyped text) -> untyped
+
+  # text: 깨우/VV/*+어/EC/*
+  # returns [{:token=>"깨우", :feature=>"VV"}, {:token=>"어", :feature=>"EC"}]
+  def parse_composed_feature: (untyped text) -> untyped
+end

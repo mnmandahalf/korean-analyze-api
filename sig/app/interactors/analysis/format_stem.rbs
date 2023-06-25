@@ -1,0 +1,11 @@
+class Analysis::FormatStem
+  include ::Interactor
+
+  def call: () -> untyped
+
+  private
+
+  def format_stem: (untyped tokens) -> untyped
+
+  def stem: (untyped token, untyped feature) -> (untyped | nil)
+end

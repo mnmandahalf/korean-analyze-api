@@ -1,0 +1,3 @@
+class AnalyzeController < ApplicationController
+  def index: () -> untyped
+end
