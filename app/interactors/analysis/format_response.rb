@@ -10,12 +10,12 @@ class Analysis::FormatResponse
   private
 
   def format_response
-    {
-      text: context.text,
-      romanized: romanize(context.text),
-      translation: context.translation,
-      tokens: format_tokens(context.tokens, context.tokons_translation)
-    }
+    analysis = Analysis.new
+    analysis.text = context.text
+    analysis.romanized = romanize(context.text)
+    analysis.translation = context.translation
+    analysis.tokens = format_tokens(context.tokens, context.tokons_translation)
+    AnalysisResource.new(analysis).serialize
   end
 
   def format_tokens(tokens, translated_tokens)
